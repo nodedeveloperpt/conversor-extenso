@@ -16,7 +16,9 @@ def fUnidades(valor,currency=False):
                '4':'QUATRO','5':'CINCO',
                '6':'SEIS','7':'SETE',
                '8':'OITO','9':'NOVE'}
+
     retorno =""
+
     if ( currency == True ):
         num = int(valor)
         if num == 0:
@@ -142,23 +144,28 @@ def ConvertCurrencyToPortuguese(valor,currency=False):
     while (len(v) != 0):
         tmp = mid(v,pos,3)
         num = int(tmp)
+        tmp = fCentenas(tmp,currency)
 
-        if num != 0:
-            tmp = fCentenas(tmp,currency)
+        if trim(extenso) == "ZERO":
+            extenso = ""
 
-            if num == 1 and count == 1:
-                tmp = singular[count]
+        if num == 1 and count == 1:
+            tmp = singular[count]
 
-            if num == 1 and count > 1:
-                tmp = tmp + singular[count]
+        if num == 1 and count > 1:
+            tmp = tmp + singular[count]
 
-            if num > 1 and count == 1:
-                tmp = tmp + singular[count]
+        if num > 1 and count == 1:
+            tmp = tmp + singular[count]
 
-            if num > 1 and count > 1:
-                tmp = tmp + plural[count]
+        if num > 1 and count > 1:
+            tmp = tmp + plural[count]
+
+        extenso = trim(extenso)
+        if len(extenso) != 0:
+            extenso = trim(tmp) + " E " + extenso
         else:
-            tmp = ""
+            extenso = extenso + trim(tmp)
 
         v = v[0:pos]
         pos = len(v)-3
@@ -167,12 +174,6 @@ def ConvertCurrencyToPortuguese(valor,currency=False):
         elif (pos == 0):
             pos = 0
         count += 1
-
-        extenso = trim(extenso)
-        if len(extenso) != 0:
-            extenso = trim(tmp) + " E " + extenso
-        else:
-            extenso = extenso + trim(tmp)
 
     if currency:
         if len(centimos) != 0:
