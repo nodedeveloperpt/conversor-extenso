@@ -23,6 +23,8 @@ def fUnidades(valor,currency=False):
         num = int(valor)
         if num == 0:
             retorno = ""
+        else:
+            retorno = digitos.get(valor)
     else:
         retorno = digitos.get(valor)
 
