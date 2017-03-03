@@ -3,6 +3,7 @@
 Converter valor numerico (String) para o seu Extenso
 
 numeros = ['0','1','9','10','14','99','100','101','357','1000','1001','1034','1589','125967','10000']
+
 for i in range(0,len(numeros)):
     print("Numero "+ numeros[i]+ "->" + ConvertCurrencyToPortuguese(numeros[i],False))
 
